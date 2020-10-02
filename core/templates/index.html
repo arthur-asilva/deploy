@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+    <title>Upload de arquivos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        html,
+        body,
+        .container {
+            width: calc(100% - 40px);
+            height: calc(100% - 20px);
+            margin: 10px 20px;
+        }
+
+        .container .content-section {
+            width: 50%;
+            float: left;
+            height: 100%;
+        }
+
+        .section-margin {
+            margin: 0px 50px;
+        }
+
+        .well {
+            margin-top: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content-section">
+            <div class="well">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <label class="custom-file-label" for="inputGroupFile">Choose file</label>
+                        <input type="file" class="custom-file-input" name="file" id="inputGroupFile"><br>
+                        <button type="submit" class="btn btn-primary">ENVIAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="content-section">
+            <div class="section-margin">
+                <div class="page-header">
+                    <h1>Upload de arquivos <br>
+                        <small>Lista de componentes</small>
+                    </h1>
+                </div>
+                <ul class="media-list">
+                    {% for imagem in data %}
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src='media/{{imagem}}' width="100" height="80">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">Localizado em: {{MEDIA_URL}}{{imagem}}</h4>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
