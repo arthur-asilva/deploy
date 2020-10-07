@@ -11,4 +11,9 @@ def UploadArquivos(request):
         fs = FileSystemStorage()
         fs.save(myfile.name, myfile)
 
+    if request.method == 'GET' and len(request.GET) > 0:
+        file_delete = dir + '/' + os.listdir(dir)[int(request.GET['id'])]
+        if os.path.exists(file_delete):
+            os.remove(file_delete)
+
     return render(request, 'index.html', {'data': os.listdir(dir)})

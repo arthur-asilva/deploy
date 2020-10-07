@@ -31,6 +31,9 @@
         .well {
             margin-top: 200px;
         }
+	.controle {
+            float: right;
+        }
     </style>
 </head>
 
@@ -56,17 +59,20 @@
                     </h1>
                 </div>
                 <ul class="media-list">
-                    {% for imagem in data %}
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src='media/{{imagem}}' width="100" height="80">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Localizado em: {{MEDIA_URL}}{{imagem}}</h4>
-                            </div>
-                        </li>
+			{% for imagem in data %}
+                    <li class="media">
+                        <a href="{% url 'upload_arquivo' %}?id={{forloop.counter0}}" class="btn btn-danger controle">Apagar</a>
+
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src='media/{{imagem}}' width="100" height="80">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Localizado em: {{MEDIA_URL}}{{imagem}}</h4>
+                        </div>
+
+                    </li>
                     {% endfor %}
-                </ul>
+                <ul>
             </div>
         </div>
     </div>
